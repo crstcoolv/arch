@@ -50,7 +50,7 @@ update_config=1
 Use: "wpa_passphrase wifi_name password"  to get the configs and attach to /etc/wpa_supplicant/wpa_supplicant-wlan0.conf
 remove the line #psk "password", always not a good idea store password in a plain text.
 
-Enable and start de services:
+Enable and start the services:
 
 systemctl enable systemd-networkd
 systemctl enable systemd-resolved
