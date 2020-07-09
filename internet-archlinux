@@ -1,0 +1,59 @@
+Create the following files:
+
+/etc/systemd/network/wireless.network
+#####################################
+
+[Match]
+Name=wlan0
+
+[Network]
+DHCP=yes
+
+[DHCP]
+RouteMetric=20
+
+######################################
+
+/etc/systemd/network/wired.network
+######################################
+
+[Match]
+Name=eth0
+
+[Network]
+DHCP=yes
+
+[DHCP]
+RouteMetric=10
+
+######################################
+
+Make sure that the names are correts (use the command "ip a") 
+or use:
+ln -s /dev/null /etc/udev/rules.d/80-net-setup-link.rules
+to get the old and juice stuff (wlan0 and eth0)
+
+install wpa_supplicant.
+
+create the file:
+
+/etc/wpa_supplicant/wpa_supplicant-wlan0.conf
+######################################
+
+ctrl_interface=/run/wpa_supplicant
+update_config=1
+
+######################################
+
+Use: "wpa_passphrase wifi_name password"  to get the configs and attach to /etc/wpa_supplicant/wpa_supplicant-wlan0.conf
+remove the line #psk "password", always not a good idea store password in a plain text.
+
+Enable and start de services:
+
+systemctl enable systemd-networkd
+systemctl enable systemd-resolved
+systemctl enable wpa_supplicant@wlan0
+
+systemctl start systemd-networkd
+systemctl start systemd-resolved
+systemctl start wpa_supplicant@wlan0
