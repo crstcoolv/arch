@@ -1,3 +1,5 @@
+Setup network (wired and wifi) using systemd-networkd.
+
 Create the following files:
 
 /etc/systemd/network/wireless.network
